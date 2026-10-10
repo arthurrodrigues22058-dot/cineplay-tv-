@@ -1,0 +1,402 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#101014">
+<meta name="description" content="CinePlay: descubra filmes clássicos, vídeos e conteúdos gratuitos em fontes legais.">
+<title>CinePlay - Filmes grátis</title>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: #101014;
+  color: #fff;
+  font-family: Arial, sans-serif;
+}
+
+header {
+  background: #e50914;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.logo {
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.logo span { color: #171717; }
+
+header a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.hero {
+  padding: 42px 20px;
+  background: linear-gradient(135deg, #321016, #171721, #101014);
+}
+
+.hero h1 {
+  font-size: clamp(28px, 6vw, 44px);
+  margin: 0 0 12px;
+}
+
+.hero p {
+  color: #ddd;
+  line-height: 1.6;
+  max-width: 600px;
+}
+
+main { padding: 20px; }
+
+.search {
+  width: 100%;
+  padding: 15px;
+  border: 1px solid #444;
+  border-radius: 10px;
+  background: #24242b;
+  color: white;
+  font-size: 16px;
+  margin: 8px 0 16px;
+}
+
+.filters {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 25px;
+}
+
+.filters button {
+  background: #292930;
+  color: white;
+  border: 1px solid #444;
+  padding: 10px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.filters button.active,
+.watch {
+  background: #e50914;
+  color: white;
+}
+
+h2 { margin-top: 30px; }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
+  gap: 16px;
+}
+
+.card {
+  background: #202027;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #333;
+}
+
+.poster {
+  min-height: 175px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 14px;
+  background: linear-gradient(145deg, #56202b, #191923);
+}
+
+.poster .symbol {
+  font-size: 44px;
+  margin-bottom: 12px;
+}
+
+.poster strong { font-size: 17px; }
+
+.card-content { padding: 13px; }
+
+.card-content p {
+  color: #ccc;
+  font-size: 14px;
+  line-height: 1.5;
+  min-height: 62px;
+}
+
+.watch {
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 7px;
+  padding: 12px 8px;
+  margin-top: 12px;
+}
+
+.watch:hover { background: #b80710; }
+
+.note {
+  color: #bbb;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.empty {
+  color: #ddd;
+  padding: 20px 0;
+}
+
+footer {
+  text-align: center;
+  padding: 28px 20px;
+  margin-top: 30px;
+  background: #19191f;
+  color: #bbb;
+  line-height: 1.7;
+}
+
+footer a { color: #ff777e; }
+
+[hidden] { display: none !important; }
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">CINE<span>PLAY</span> 🎬</div>
+  <a href="#catalogo">Explorar filmes</a>
+</header>
+
+<section class="hero">
+  <h1>Seu próximo filme começa aqui.</h1>
+  <p>
+    Descubra filmes clássicos, documentários e vídeos gratuitos
+    em plataformas que disponibilizam conteúdo online.
+  </p>
+  <a class="watch" href="#catalogo" style="display:inline-block">
+    EXPLORAR CATÁLOGO
+  </a>
+</section>
+
+<main id="catalogo">
+  <h2>🔎 Encontre seu conteúdo</h2>
+
+  <input
+    class="search"
+    id="search"
+    type="search"
+    placeholder="Pesquisar filmes e categorias..."
+    aria-label="Pesquisar no catálogo"
+  >
+
+  <div class="filters" aria-label="Filtrar conteúdo">
+    <button class="active" data-category="todos">Todos</button>
+    <button data-category="classicos">Clássicos</button>
+    <button data-category="documentarios">Documentários</button>
+    <button data-category="espaco">Espaço e ciência</button>
+  </div>
+
+  <h2>🎬 Catálogo gratuito</h2>
+
+  <div class="grid" id="movies">
+
+    <article class="card"
+      data-category="classicos"
+      data-search="filmes clássicos cinema antigo domínio público internet archive">
+      <div class="poster">
+        <div class="symbol">🎞️</div>
+        <strong>Cinema Clássico</strong>
+      </div>
+      <div class="card-content">
+        <strong>Filmes antigos</strong>
+        <p>Explore o acervo de filmes e confira as condições de acesso de cada título.</p>
+        <a class="watch"
+          href="https://archive.org/details/movies"
+          target="_blank" rel="noopener noreferrer">
+          Assistir grátis ↗
+        </a>
+      </div>
+    </article>
+
+    <article class="card"
+      data-category="classicos"
+      data-search="filmes domínio público wikimedia commons cinema">
+      <div class="poster"
+        style="background:linear-gradient(145deg,#254c4a,#171923)">
+        <div class="symbol">🎭</div>
+        <strong>Filmes de época</strong>
+      </div>
+      <div class="card-content">
+        <strong>Acervo de filmes</strong>
+        <p>Encontre obras classificadas como domínio público. Confira a licença de cada arquivo.</p>
+        <a class="watch"
+          href="https://commons.wikimedia.org/wiki/Category:Films_in_the_public_domain"
+          target="_blank" rel="noopener noreferrer">
+          Ver filmes ↗
+        </a>
+      </div>
+    </article>
+
+    <article class="card"
+      data-category="documentarios"
+      data-search="documentários vídeos educativos ciência natureza história internet archive">
+      <div class="poster"
+        style="background:linear-gradient(145deg,#72522b,#171923)">
+        <div class="symbol">🌎</div>
+        <strong>Documentários</strong>
+      </div>
+      <div class="card-content">
+        <strong>Conhecimento e história</strong>
+        <p>Explore vídeos e documentários disponíveis no acervo online.</p>
+        <a class="watch"
+          href="https://archive.org/details/movies"
+          target="_blank" rel="noopener noreferrer">
+          Explorar vídeos ↗
+        </a>
+      </div>
+    </article>
+
+    <article class="card"
+      data-category="espaco"
+      data-search="espaço astronomia planetas nasa vídeos ciência documentários">
+      <div class="poster"
+        style="background:linear-gradient(145deg,#203e79,#171923)">
+        <div class="symbol">🚀</div>
+        <strong>Espaço e ciência</strong>
+      </div>
+      <div class="card-content">
+        <strong>Universo e exploração</strong>
+        <p>Vídeos e conteúdos científicos gratuitos sobre missões espaciais.</p>
+        <a class="watch"
+          href="https://www.nasa.gov/multimedia/"
+          target="_blank" rel="noopener noreferrer">
+          Ver conteúdos ↗
+        </a>
+      </div>
+    </article>
+
+    <article class="card"
+      data-category="documentarios"
+      data-search="NASA Plus séries originais documentários espaço exploração">
+      <div class="poster"
+        style="background:linear-gradient(145deg,#174f67,#171923)">
+        <div class="symbol">🛰️</div>
+        <strong>NASA+</strong>
+      </div>
+      <div class="card-content">
+        <strong>Séries e documentários</strong>
+        <p>Conheça a plataforma gratuita de vídeos e séries da NASA.</p>
+        <a class="watch"
+          href="https://plus.nasa.gov/"
+          target="_blank" rel="noopener noreferrer">
+          Assistir grátis ↗
+        </a>
+      </div>
+    </article>
+
+    <article class="card"
+      data-category="classicos"
+      data-search="vídeos de filmes domínio público wikimedia arquivo">
+      <div class="poster"
+        style="background:linear-gradient(145deg,#613b6d,#171923)">
+        <div class="symbol">📽️</div>
+        <strong>Filmes em vídeo</strong>
+      </div>
+      <div class="card-content">
+        <strong>Vídeos de domínio público</strong>
+        <p>Consulte filmes disponíveis em vídeo e verifique os direitos de cada obra.</p>
+        <a class="watch"
+          href="https://commons.wikimedia.org/wiki/Category:Videos_of_films_in_the_public_domain"
+          target="_blank" rel="noopener noreferrer">
+          Explorar acervo ↗
+        </a>
+      </div>
+    </article>
+
+  </div>
+
+  <p id="empty" class="empty" hidden>
+    Nenhum resultado encontrado. Tente outra pesquisa ou categoria.
+  </p>
+
+  <section>
+    <h2>ℹ️ Sobre o CinePlay</h2>
+    <p class="note">
+      O CinePlay é um catálogo independente de links para conteúdos
+      disponibilizados por outras plataformas. Não hospedamos nem
+      reproduzimos os filmes dessas plataformas neste site.
+      A disponibilidade, os idiomas e as condições de uso variam
+      conforme cada conteúdo e serviço.
+    </p>
+  </section>
+</main>
+
+<footer>
+  <strong>CinePlay</strong> — Descubra, explore e assista.<br>
+  Conteúdo gratuito disponível em plataformas externas.<br>
+  <a href="#catalogo">Voltar ao catálogo ↑</a>
+</footer>
+
+<script>
+const search = document.getElementById("search");
+const cards = [...document.querySelectorAll(".card")];
+const filters = [...document.querySelectorAll("[data-category]")];
+const empty = document.getElementById("empty");
+
+let category = "todos";
+
+function updateCatalog() {
+  const query = search.value
+    .trim()
+    .toLocaleLowerCase("pt-BR");
+
+  let visible = 0;
+
+  cards.forEach(card => {
+    const text = (
+      card.innerText + " " + card.dataset.search
+    ).toLocaleLowerCase("pt-BR");
+
+    const matchesText = text.includes(query);
+    const matchesCategory =
+      category === "todos" ||
+      card.dataset.category === category;
+
+    const show = matchesText && matchesCategory;
+    card.hidden = !show;
+
+    if (show) visible++;
+  });
+
+  empty.hidden = visible > 0;
+}
+
+search.addEventListener("input", updateCatalog);
+
+filters.forEach(button => {
+  button.addEventListener("click", () => {
+    category = button.dataset.category;
+
+    filters.forEach(item => {
+      item.classList.toggle("active", item === button);
+    });
+
+    updateCatalog();
+  });
+});
+</script>
+
+</body>
+</html>
