@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CinePlay</title>
+<style>
+body {
+  margin: 0;
+  background: #101014;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+header {
+  background: #e50914;
+  padding: 20px;
+  font-size: 28px;
+  font-weight: bold;
+}
+main { padding: 18px; }
+input {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 14px;
+  border-radius: 8px;
+  border: 0;
+  font-size: 16px;
+}
+h2 { margin-top: 28px; }
+.filmes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+.card {
+  background: #25252d;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.card img {
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+}
+.card div { padding: 10px; }
+a {
+  display: inline-block;
+  background: #e50914;
+  color: white;
+  padding: 10px;
+  border-radius: 6px;
+  text-decoration: none;
+}
+</style>
+</head>
+<body>
+<header>🎬 CinePlay</header>
+<main>
+<p>Filmes, séries e trailers para descobrir.</p>
+<input id="busca" placeholder="Pesquisar filmes e séries...">
+<h2>Catálogo</h2>
+<div class="filmes" id="catalogo"></div>
+<p>Os links levam a páginas externas. A disponibilidade pode variar.</p>
+</main>
+<script>
+const filmes = [
+  {
+    nome: "Big Buck Bunny",
+    tipo: "Animação",
+    imagem: "https://peach.blender.org/wp-content/uploads/title_anouncement.jpg",
+    link: "https://peach.blender.org/"
+  },
+  {
+    nome: "Sintel",
+    tipo: "Fantasia",
+    imagem: "https://durian.blender.org/wp-content/uploads/2010/05/sintel_poster.jpg",
+    link: "https://durian.blender.org/"
+  },
+  {
+    nome: "Filmes gratuitos",
+    tipo: "Catálogo",
+    imagem: "https://placehold.co/400x600/25252d/ffffff?text=Filmes+Gratis",
+    link: "https://www.youtube.com/"
+  },
+  {
+    nome: "Documentários",
+    tipo: "Vídeos",
+    imagem: "https://placehold.co/400x600/25252d/ffffff?text=Documentarios",
+    link: "https://www.youtube.com/"
+  }
+];
+
+function mostrar(termo = "") {
+  const catalogo = document.getElementById("catalogo");
+  catalogo.innerHTML = "";
+  filmes.filter(f => f.nome.toLowerCase().includes(termo.toLowerCase()))
+    .forEach(f => {
+      const card = document.createElement("article");
+      card.className = "card";
+      const img = document.createElement("img");
+      img.src = f.imagem;
+      img.alt = f.nome;
+      const info = document.createElement("div");
+      const titulo = document.createElement("h3");
+      titulo.textContent = f.nome;
+      const tipo = document.createElement("p");
+      tipo.textContent = f.tipo;
+      const link = document.createElement("a");
+      link.href = f.link;
+      link.target = "_blank";
+      link.rel = "noopener";
+      link.textContent = "Ver conteúdo";
+      info.append(titulo, tipo, link);
+      card.append(img, info);
+      catalogo.append(card);
+    });
+}
+document.getElementById("busca").addEventListener("input", e => mostrar(e.target.value));
+mostrar();
+</script>
+</body>
+</html>
